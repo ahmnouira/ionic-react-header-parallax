@@ -1,1 +1,1 @@
-export * from './useIonHeaderParallax'
+export * from './useIonicHeaderParallax'
