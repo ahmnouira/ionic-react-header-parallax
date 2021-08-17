@@ -1,9 +1,6 @@
-# ionic-react-header-parallax
-
-
-<p align="center">
-    Ionic React libray to handle the parallax effect for Ion Header component
-</p>
+<h4 align="center">
+    <b>Ionic React</b> libray to handle the parallax effect for <b>IonHeader</b> component
+</h4>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/ionic-react-header-parallax
