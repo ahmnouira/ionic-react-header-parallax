@@ -9,8 +9,6 @@ export type UseIonHeaderParallxInputResult = {
   ref: React.MutableRefObject<HTMLElement | null>
 }
 
-import {useIonHeaderParallax} from '../src/useIonicHeaderParallax'
+import { useIonHeaderParallax } from '../src/useIonicHeaderParallax'
 
-export {
-  useIonHeaderParallax
-}
+export { useIonHeaderParallax }
