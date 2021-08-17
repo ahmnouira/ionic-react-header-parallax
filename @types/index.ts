@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 export type UseIonHeaderParallxInput = {
   image: string
   expandedColor: string
@@ -10,3 +8,5 @@ export type UseIonHeaderParallxInput = {
 export type UseIonHeaderParallxInputResult = {
   ref: React.MutableRefObject<HTMLElement | null>
 }
+
+export { useIonHeaderParallax } from '../src/useIonicHeaderParallax'

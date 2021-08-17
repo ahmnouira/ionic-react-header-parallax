@@ -1,17 +1,23 @@
 import * as React from 'react'
 
-export type UseIonicHeaderParallxInput = {
+export type UseIonicHeaderParallaxInput = {
   image: string
   expandedColor: string
   titleColor: string
   maximumHeight?: number
 }
 
-export type UseIonHeaderParallxInputResult = {
+export type UseIonHeaderParallaxInputResult = {
   ref: React.MutableRefObject<HTMLElement | null>
+  onScroll: () => void
 }
 
-export function UseIonHeaderParallxInputResult({}: UseIonicHeaderParallxInput): UseIonHeaderParallxInputResult {
+export function useIonHeaderParallax({
+  titleColor,
+  image,
+  expandedColor,
+  maximumHeight = 300,
+}: UseIonicHeaderParallaxInput): UseIonHeaderParallaxInputResult {
   const headerRef = React.useRef<HTMLElement>(null)
 
   let header: HTMLElement
@@ -21,18 +27,18 @@ export function UseIonHeaderParallxInputResult({}: UseIonicHeaderParallxInput): 
   let colorOverlay: HTMLElement
   let barButtons: HTMLElement | null
   let scrollContent: HTMLElement | null
-  // let headerHeight: any
-  // let headerMinHeight: number
-  // let translateAmt: any
-  // let scaleAmt: any
-  // let scrollTop: any
-  // let lastScrollTop: any
-  // let ticking: any
-  // let originalToolbarBgColor: string
+  let headerHeight: number
+  let headerMinHeight: number
+  let translateAmt: any
+  let scaleAmt: any
+  let scrollTop: any
+  let lastScrollTop: any
+  let ticking: any
+  let originalToolbarBgColor: string
   let overlayTitle: HTMLElement | null
   let ionTitle: HTMLElement | null
-  // let overlayButtons: HTMLElement[]
-  // let scrollContentPaddingTop: number
+  let overlayButtons: HTMLElement[]
+  let scrollContentPaddingTop: string | number
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -47,7 +53,7 @@ export function UseIonHeaderParallxInputResult({}: UseIonicHeaderParallxInput): 
   }, [])
 
   const initElements = () => {
-    if (!(headerRef && headerRef.current)) throw new ReferenceError('Ref is required')
+    if (!(headerRef && headerRef.current)) throw new ReferenceError('Ref is required to be set to <IonHeader />')
 
     const parentElement = headerRef.current.parentElement
 
@@ -74,7 +80,7 @@ export function UseIonHeaderParallxInputResult({}: UseIonicHeaderParallxInput): 
 
     barButtons = header.querySelector('IonButtons')
 
-    const ionContent = parentElement.querySelector('ion-content')
+    const ionContent = parentElement.querySelector('IonContent')
 
     if (!ionContent) throw new Error('Parallax directive requires an <IonContent> element on the page to work.')
 
@@ -85,6 +91,10 @@ export function UseIonHeaderParallxInputResult({}: UseIonicHeaderParallxInput): 
     if (!scrollContent) {
       throw new Error('Parallax directive requires an <IonContent> element on the page to work.')
     }
+
+    headerHeight = scrollContent.clientHeight
+
+    console!.log('headerHeight', headerHeight)
 
     // Create image overlay
     imageOverlay = document.createElement('div')
@@ -119,11 +129,95 @@ export function UseIonHeaderParallxInputResult({}: UseIonicHeaderParallxInput): 
     console.log('finished')
   }
 
-  const initStyles = () => {}
+  const initStyles = () => {
+    ticking = false
+
+    if (!scrollContent || !toolbar) {
+      return
+    }
+
+    // fetch styles
+
+    headerMinHeight = toolbar.offsetHeight
+
+    scrollContentPaddingTop = window.getComputedStyle(scrollContent, null).paddingTop.replace('px', '')
+    scrollContentPaddingTop = parseFloat(scrollContentPaddingTop)
+
+    if (!toolbarBackground) return
+
+    originalToolbarBgColor = window.getComputedStyle(toolbarBackground, null).backgroundColor
+
+    if (!originalToolbarBgColor) {
+      throw new Error('Error: toolbarBackround is null.')
+    }
+
+    // header and title
+
+    header.style.position = 'relative'
+
+    if (overlayTitle) {
+      // rerender here
+      overlayTitle.style.color = titleColor
+      overlayTitle.style.position = 'absolute'
+      overlayTitle.style.width = '100%'
+      overlayTitle.style.height = '100%'
+      overlayTitle.style.textAlign = 'center'
+    }
+
+    // color overlay
+    colorOverlay.style.backgroundColor = originalToolbarBgColor
+    colorOverlay.style.height = `${maximumHeight}px`
+    colorOverlay.style.position = 'absolute'
+    colorOverlay.style.top = `${-headerMinHeight * 0}px`
+    colorOverlay.style.left = '0'
+    colorOverlay.style.width = '100%'
+    colorOverlay.style.zIndex = '10'
+    colorOverlay.style.pointerEvents = 'none'
+
+    // image overlay
+
+    imageOverlay.style.backgroundColor = expandedColor
+
+    imageOverlay.style.backgroundImage = `url(${image || ''})`
+
+    imageOverlay.style.height = '100%'
+    imageOverlay.style.width = '100%'
+
+    imageOverlay.style.pointerEvents = 'none'
+    imageOverlay.style.backgroundSize = 'cover'
+    imageOverlay.style.backgroundPosition = 'center'
+  }
 
   const initEvents = () => {}
 
+  const onScroll = () => {
+    if (!scrollContent || !toolbar) {
+      return
+    }
+
+    scrollTop = scrollContent.scrollTop
+    if (scrollTop >= 0) {
+      translateAmt = scrollTop / 2
+      scaleAmt = 1
+    } else {
+      translateAmt = 0
+      scaleAmt = -scrollTop / headerHeight + 1
+    }
+
+    // Parallax total progress
+    headerMinHeight = toolbar.offsetHeight
+    let progress = (maximumHeight - scrollTop - headerMinHeight) / (maximumHeight - headerMinHeight)
+    progress = Math.max(progress, 0)
+
+    // ion-header: set height
+    let targetHeight = maximumHeight - scrollTop
+    targetHeight = Math.max(targetHeight, headerMinHeight)
+
+    console.log(lastScrollTop, ticking, overlayButtons)
+  }
+
   return {
     ref: headerRef,
+    onScroll,
   }
 }
