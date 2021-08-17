@@ -213,7 +213,7 @@ export function useIonHeaderParallax({
     let targetHeight = maximumHeight - scrollTop
     targetHeight = Math.max(targetHeight, headerMinHeight)
 
-    console.log(lastScrollTop, ticking, overlayButtons)
+    console.log(lastScrollTop, ticking, overlayButtons, translateAmt, scaleAmt)
   }
 
   return {
