@@ -14,7 +14,8 @@
   "readme": "https://github.com/ahmnouira/ionic-react-header-parallax.git#redme",
   "homepage": "https://github.com/ahmnouira/ionic-react-header-parallax",
   "keywords": [
-    "ionic"
+    "ionic",
+    "parallax"
   ],
   "contributors": [
     {
@@ -26,10 +27,11 @@
     "url": "https://github.com/ahmnouira/ionic-react-header-parallax.git/issues"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "src/index.d.ts"
   ],
   "main": "dist/index.js",
-  "types": "@types/index.ts",
+  "types": "src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -52,6 +54,7 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.1",
     "@types/react": "^17.0.18",
+    "auto-changelog": "^2.3.0",
     "eslint": "^7.32.0",
     "jest": "^27.0.6",
     "np": "^7.5.0",
@@ -61,10 +64,12 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.0",
-    "typescript": "^4.3.5",
-    "yarn": "^1.22.11"
+    "typescript": "^4.3.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "ionic-react-header-parallax": "^0.0.5"
   }
 }
