@@ -1,0 +1,43 @@
+{
+  "name": "ionic-react-header-parallax",
+  "version": "0.0.0",
+  "description": "A React Hook parallax effect for Ionic React <IonHeader> component",
+  "author": {
+    "name": "Ahmd Nouira",
+    "email": "ahmnouira@gmail.comm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmnouira/ionic-react-header-parallax.git"
+  },
+  "keywords": [
+    "ionic"
+  ],
+  
+  "bugs": {
+    "url": "https://github.com/ahmnouira/ionic-react-header-parallax.git/issues"
+  },
+  "main": "dist/index.js",
+  "types": "@types/index.ts",
+  "scripts": {
+    "prepare": "yarn build",
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "eslint:fix": "eslint src/**/*.ts --fix",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,json}\"",
+    "release": "auto shipit",
+    "release:canary": "auto canary"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/react": "^17.0.18",
+    "auto": "^10.31.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "typescript": "^4.3.5"
+  }
+}
