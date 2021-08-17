@@ -5,8 +5,6 @@ install:
   - npm install
 script:
   - npm run test:coverage
-  - codecov -f coverage/*.json
+  - codecov -f coverage/*.json --disable=gcov
 
-env:
-  - CODECOV_TOKEN=856e0d96-e821-4d49-af50-68f3e0331e9e
 
