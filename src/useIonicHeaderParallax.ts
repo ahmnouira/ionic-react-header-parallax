@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export type UseIonicHeaderParallaxInput = {
+export type UseIonHeaderParallaxInput = {
   image: string
   expandedColor: string
   titleColor: string
@@ -17,7 +17,7 @@ export function useIonHeaderParallax({
   image,
   expandedColor,
   maximumHeight = 300,
-}: UseIonicHeaderParallaxInput): UseIonHeaderParallaxInputResult {
+}: UseIonHeaderParallaxInput): UseIonHeaderParallaxInputResult {
   const headerRef = React.useRef<HTMLElement>(null)
 
   let header: HTMLElement
