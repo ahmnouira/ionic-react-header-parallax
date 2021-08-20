@@ -55,7 +55,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@ionic/react": "^5.6.14",
     "@testing-library/react": "^12.0.0",
-    "@types/jest": "26.6.0",
+    "@types/jest": "^26",
     "@types/node": "^16.6.1",
     "@types/react": "^17.0.18",
     "auto-changelog": "^2.3.0",
@@ -68,7 +68,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
-    "ts-jest": "26.6.0",
+    "ts-jest": "^26",
     "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
   },

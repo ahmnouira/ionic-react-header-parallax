@@ -62,6 +62,6 @@
   },
   "description": "An Ionic project",
   "devDependencies": {
-    "jest": "26.6.0"
+    "jest": "26"
   }
 }
