@@ -15,7 +15,9 @@
   "homepage": "https://github.com/ahmnouira/ionic-react-header-parallax",
   "keywords": [
     "ionic",
-    "parallax"
+    "parallax",
+    "ion-header",
+    "header"
   ],
   "contributors": [
     {
@@ -51,6 +53,7 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@ionic/react": "^5.6.14",
     "@testing-library/react": "^12.0.0",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.1",

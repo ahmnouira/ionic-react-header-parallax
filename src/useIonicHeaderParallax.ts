@@ -7,9 +7,13 @@ export type UseIonHeaderParallaxInput = {
   maximumHeight?: number
 }
 
-export type UseIonHeaderParallaxInputResult = {
-  ref: React.MutableRefObject<HTMLElement | null>
-  onScroll: () => void
+export type UseIonHeaderParallaxResult = {
+  onScroll: (ev: any) => void
+  colorOverlayStyle: React.CSSProperties
+  imageOverlayStyle: React.CSSProperties
+  overlayTitleStyle: React.CSSProperties
+  toolbarTitleStyle: React.CSSProperties
+  headerStyle: React.CSSProperties
 }
 
 export function useIonHeaderParallax({
@@ -17,8 +21,7 @@ export function useIonHeaderParallax({
   image,
   expandedColor,
   maximumHeight = 300,
-}: UseIonHeaderParallaxInput): UseIonHeaderParallaxInputResult {
-  const headerRef = React.useRef<HTMLElement>(null)
+}: UseIonHeaderParallaxInput) {
 
   let header: HTMLElement
   let toolbar: HTMLElement | null
@@ -53,13 +56,12 @@ export function useIonHeaderParallax({
   }, [])
 
   const initElements = () => {
-    if (!(headerRef && headerRef.current)) throw new ReferenceError('Ref is required to be set to <IonHeader />')
 
-    const parentElement = headerRef.current.parentElement
+    const header: HTMLIonHeaderElement = document.getElementsByTagName('ion-header')[0]
+
+    const parentElement = header.parentElement
 
     if (!parentElement) throw new Error('No parentElemnt')
-
-    header = headerRef.current
 
     // check this
     toolbar = header.querySelector('IonToolbar')
@@ -188,9 +190,9 @@ export function useIonHeaderParallax({
     imageOverlay.style.backgroundPosition = 'center'
   }
 
-  const initEvents = () => {}
+  const initEvents = () => { }
 
-  const onScroll = () => {
+  const onScroll = (_ev: any) => {
     if (!scrollContent || !toolbar) {
       return
     }
@@ -217,7 +219,6 @@ export function useIonHeaderParallax({
   }
 
   return {
-    ref: headerRef,
-    onScroll,
+    onScroll
   }
 }
