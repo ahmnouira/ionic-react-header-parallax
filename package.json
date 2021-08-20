@@ -43,7 +43,7 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.ts",
     "eslint:fix": "eslint src/**/*.ts --fix",
-    "format:fix": "prettier --write \"**/*.{ts,tsx,json}\"",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "clean-install": "rimraf node_modules && yarn",
     "changelog": "auto-changelog -p",
     "prepare": "rimraf dist && yarn build",

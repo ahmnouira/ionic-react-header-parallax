@@ -5,12 +5,19 @@ export type UseIonHeaderParallaxInput = {
   maximumHeight?: number
 }
 
-export type UseIonHeaderParallaxInputResult = {
+export type UseIonHeaderParallaxResult = {
   ref: React.MutableRefObject<HTMLElement | null>
   onScroll: () => void
 }
 
+export type IonHeaderParallaxProps = {
+  image: string
+  expandedColor?: string
+  originalToolbarBgColor: string
+  maximumHeight: number
+  headerMinHeight: number
+}
 
-export function useIonHeaderParallax(input: UseIonHeaderParallaxInput): UseIonHeaderParallaxInputResult;
+export const IonHeaderParallax: React.FC<React.PropsWithChildren<IonHeaderParallaxProps>>
 
-
+export function useIonHeaderParallax(input: UseIonHeaderParallaxInput): UseIonHeaderParallaxResult

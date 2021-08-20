@@ -22,7 +22,6 @@ export function useIonHeaderParallax({
   expandedColor,
   maximumHeight = 300,
 }: UseIonHeaderParallaxInput) {
-
   let header: HTMLElement
   let toolbar: HTMLElement | null
   let toolbarBackground: HTMLElement | null
@@ -56,7 +55,6 @@ export function useIonHeaderParallax({
   }, [])
 
   const initElements = () => {
-
     const header = document.getElementsByTagName('ion-header')[0]
 
     const parentElement = header.parentElement
@@ -190,7 +188,7 @@ export function useIonHeaderParallax({
     imageOverlay.style.backgroundPosition = 'center'
   }
 
-  const initEvents = () => { }
+  const initEvents = () => {}
 
   const onScroll = (_ev: any) => {
     if (!scrollContent || !toolbar) {
@@ -219,6 +217,6 @@ export function useIonHeaderParallax({
   }
 
   return {
-    onScroll
+    onScroll,
   }
 }

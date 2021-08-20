@@ -4,6 +4,14 @@ import { IonHeaderParallax } from './IonHeaderParallax'
 
 describe('IonHeaderParallax', () => {
   it('should render correctly', () => {
-    const {} = render(<IonHeaderParallax />)
+    const {} = render(
+      <IonHeaderParallax
+        image="https://picsum.photos/1080"
+        maximumHeight={350}
+        expandedColor="#AAA"
+        headerMinHeight={100}
+        originalToolbarBgColor="blue"
+      />
+    )
   })
 })
