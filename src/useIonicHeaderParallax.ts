@@ -57,7 +57,7 @@ export function useIonHeaderParallax({
 
   const initElements = () => {
 
-    const header: HTMLIonHeaderElement = document.getElementsByTagName('ion-header')[0]
+    const header = document.getElementsByTagName('ion-header')[0]
 
     const parentElement = header.parentElement
 

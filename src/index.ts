@@ -1,2 +1,2 @@
 export { useIonHeaderParallax } from './useIonicHeaderParallax'
-export type { UseIonHeaderParallaxInputResult, UseIonHeaderParallaxInput } from './useIonicHeaderParallax'
+export type { UseIonHeaderParallaxInput, UseIonHeaderParallaxResult } from './useIonicHeaderParallax'
