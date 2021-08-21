@@ -1,5 +1,5 @@
 <h1 align="center">
-    <b>Easy to use hook to handle the parallax effect for <b>IonHeader</b> component React Ionic.
+    Easy to use hook to handle the parallax effect for <b>IonHeader</b> component in React Ionic.
 </h1>
 
 <p align="center">
