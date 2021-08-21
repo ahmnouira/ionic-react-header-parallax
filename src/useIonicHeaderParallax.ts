@@ -42,11 +42,8 @@ export function useIonHeaderParallax({
       // ion-toolbar background
       const toolbarShadowRoot = toolbar.shadowRoot
 
-      console.log(toolbarShadowRoot)
       if (!toolbarShadowRoot) throw new Error('No shadow')
       const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
-
-      console.log(toolbarBackground)
 
       // ion-title
       const ionTitle = toolbar.querySelector('ion-title')
@@ -205,7 +202,6 @@ export function useIonHeaderParallax({
       }
     }
   }
-
 
   return {
     ref,
