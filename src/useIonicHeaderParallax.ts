@@ -1,123 +1,80 @@
 import * as React from 'react'
 
 export type UseIonHeaderParallaxInput = {
-  image: string
-  expandedColor: string
-  titleColor: string
+  image?: string
+  expandedColor?: string
+  titleColor?: string
   maximumHeight?: number
 }
 
-export type UseIonHeaderParallaxResult = {
-  onScroll: (ev: any) => void
-  colorOverlayStyle: React.CSSProperties
-  imageOverlayStyle: React.CSSProperties
-  overlayTitleStyle: React.CSSProperties
-  toolbarTitleStyle: React.CSSProperties
-  headerStyle: React.CSSProperties
-}
+export type UseIonHeaderParallaxResult = void
 
 export function useIonHeaderParallax({
-  titleColor,
-  image,
-  expandedColor,
+  titleColor = '#AAA',
+  image = 'https://picsum.photos/1080',
+  expandedColor = '#313131',
   maximumHeight = 300,
-}: UseIonHeaderParallaxInput) {
-  let header: HTMLElement
-  let toolbar: HTMLElement | null
-  let toolbarBackground: HTMLElement | null
-  let imageOverlay: HTMLElement
-  let colorOverlay: HTMLElement
-  let barButtons: HTMLElement | null
-  let scrollContent: HTMLElement | null
-  let headerHeight: number
-  let headerMinHeight: number
-  let translateAmt: any
-  let scaleAmt: any
-  let scrollTop: any
-  let lastScrollTop: any
-  let ticking: any
-  let originalToolbarBgColor: string
-  let overlayTitle: HTMLElement | null
-  let ionTitle: HTMLElement | null
-  let overlayButtons: HTMLElement[]
-  let scrollContentPaddingTop: string | number
+}: UseIonHeaderParallaxInput): UseIonHeaderParallaxResult {
+  /** styles */
+  const [ticking, setTicking] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     setTimeout(() => {
-      try {
-        initElements()
-        initStyles()
-        initEvents()
-      } catch (e) {
-        throw e
-      }
-    }, 100)
-  }, [])
+      initElements()
+    }, 200)
+  }, [titleColor, image, expandedColor, maximumHeight])
 
   const initElements = () => {
-    const header = document.getElementsByTagName('ion-header')[0]
-
+    // ion-header
+    const header = document.getElementsByTagName('ion-header')[0] as HTMLElement
     const parentElement = header.parentElement
+    if (!parentElement) throw new Error('No IonPage parent element')
 
-    if (!parentElement) throw new Error('No parentElemnt')
+    // ion-toolbar
+    const toolbar = header.querySelector('ion-toolbar') as HTMLElement
+    if (!toolbar) throw new Error('No <ion-toolbar>')
 
-    // check this
-    toolbar = header.querySelector('IonToolbar')
+    // ion-toolbar background
+    const toolbarShadowRoot = toolbar.shadowRoot
 
-    if (!toolbar) {
-      throw new Error('Parallax requires a <IonToolbar> or navbar element on the page to work.')
-    }
+    if (!toolbarShadowRoot) throw new Error('No shadow')
 
-    if (!toolbar.shadowRoot) {
-      throw new Error('Parallax requires a shadowRoot <IonToolbar>')
-    }
+    const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
 
-    ionTitle = toolbar.querySelector('IonTitle')
+    if (!toolbarBackground) throw new Error('No .toolbar-background')
 
-    toolbarBackground = toolbar.shadowRoot.querySelector('.toolbar-background')
+    // ion-title
+    const ionTitle = toolbar.querySelector('ion-title') as HTMLElement
 
-    console.log('toolbarBackground', toolbarBackground)
+    // ion-buttons
+    const barButtons = header.querySelector('ion-buttons') as HTMLElement
 
-    barButtons = header.querySelector('IonButtons')
+    // ion-content
+    const ionContent = parentElement.querySelector('ion-content') as HTMLElement
+    if (!ionContent) throw new Error('Parallax an <ion-content> element on the page to work.')
+    const scrollContent = ionContent.shadowRoot?.querySelector('.inner-scroll') as HTMLElement
 
-    const ionContent = parentElement.querySelector('IonContent')
 
-    if (!ionContent) throw new Error('Parallax directive requires an <IonContent> element on the page to work.')
-
-    if (!ionContent.shadowRoot) throw new Error('Parallax requires a shadowRoot <ion-content>')
-
-    scrollContent = ionContent.shadowRoot.querySelector('.inner-scroll')
-
-    if (!scrollContent) {
-      throw new Error('Parallax directive requires an <IonContent> element on the page to work.')
-    }
-
-    headerHeight = scrollContent.clientHeight
-
-    console!.log('headerHeight', headerHeight)
-
-    // Create image overlay
-    imageOverlay = document.createElement('div')
-    console.log('imageOverlay', imageOverlay)
+    // create image overly
+    const imageOverlay = document.createElement('div')
     imageOverlay.classList.add('image-overlay')
-
-    colorOverlay = document.createElement('div')
-
+    const colorOverlay = document.createElement('div')
     colorOverlay.classList.add('color-overlay')
-
     colorOverlay.appendChild(imageOverlay)
     header.appendChild(colorOverlay)
 
-    // Copy title and buttons
-    overlayTitle = ionTitle && (ionTitle.cloneNode(true) as HTMLElement)
+    const overlayTitle = ionTitle && (ionTitle.cloneNode(true) as HTMLElement)
 
-    if (!overlayTitle) throw new Error('')
-    overlayTitle.classList.add('parallax-title')
+    if (overlayTitle) {
+      overlayTitle.classList.add('parallax-title')
 
-    setTimeout(() => {
-      const toolbarTitle = overlayTitle?.shadowRoot?.querySelector('.toolbar-title') as HTMLElement
-      toolbarTitle.style.pointerEvents = 'unset'
-    })
+      setTimeout(() => {
+        if (overlayTitle.shadowRoot) {
+          const toolbarTitle = overlayTitle.shadowRoot.querySelector('.toolbar-title') as HTMLElement
+          toolbarTitle.style.pointerEvents = 'unset'
+        }
+      }, 200)
+    }
 
     if (overlayTitle) {
       imageOverlay.appendChild(overlayTitle)
@@ -126,37 +83,33 @@ export function useIonHeaderParallax({
       imageOverlay.appendChild(barButtons)
     }
 
-    console.log('finished')
-  }
-
-  const initStyles = () => {
-    ticking = false
-
-    if (!scrollContent || !toolbar) {
-      return
-    }
+    /***  initStyles ***/
+    // still in init use JS DOM
+    let headerHeight = scrollContent?.clientHeight
+    setTicking(false)
 
     // fetch styles
+    maximumHeight = parseFloat(maximumHeight.toString())
+    let headerMinHeight = toolbar.offsetHeight
 
-    headerMinHeight = toolbar.offsetHeight
+    let scrollContentPaddingTop = 0
 
-    scrollContentPaddingTop = window.getComputedStyle(scrollContent, null).paddingTop.replace('px', '')
-    scrollContentPaddingTop = parseFloat(scrollContentPaddingTop)
-
-    if (!toolbarBackground) return
-
-    originalToolbarBgColor = window.getComputedStyle(toolbarBackground, null).backgroundColor
-
-    if (!originalToolbarBgColor) {
-      throw new Error('Error: toolbarBackround is null.')
+    if (scrollContent) {
+      scrollContentPaddingTop = parseFloat(
+        window.getComputedStyle(scrollContent as Element, null).paddingTop.replace('px', '')
+      )
     }
 
-    // header and title
+    let originalToolbarBgColor = 'white'
 
+    originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
+
+
+
+    // header and title
     header.style.position = 'relative'
 
     if (overlayTitle) {
-      // rerender here
       overlayTitle.style.color = titleColor
       overlayTitle.style.position = 'absolute'
       overlayTitle.style.width = '100%'
@@ -175,48 +128,101 @@ export function useIonHeaderParallax({
     colorOverlay.style.pointerEvents = 'none'
 
     // image overlay
-
     imageOverlay.style.backgroundColor = expandedColor
-
-    imageOverlay.style.backgroundImage = `url(${image || ''})`
-
+    imageOverlay.style.backgroundImage = `url(${image})`
     imageOverlay.style.height = '100%'
     imageOverlay.style.width = '100%'
-
     imageOverlay.style.pointerEvents = 'none'
     imageOverlay.style.backgroundSize = 'cover'
     imageOverlay.style.backgroundPosition = 'center'
-  }
 
-  const initEvents = () => {}
-
-  const onScroll = (_ev: any) => {
-    if (!scrollContent || !toolbar) {
-      return
+    // .toolbar-background
+    if (toolbarBackground) {
+      toolbarBackground.style.backgroundColor = originalToolbarBgColor
     }
 
-    scrollTop = scrollContent.scrollTop
-    if (scrollTop >= 0) {
-      translateAmt = scrollTop / 2
-      scaleAmt = 1
-    } else {
-      translateAmt = 0
-      scaleAmt = -scrollTop / headerHeight + 1
+    // .bar-buttons
+    if (barButtons) {
+      barButtons.style.pointerEvents = 'all'
+
+      Array.from(barButtons.children).forEach((btn) => {
+        console.log(btn, btn as HTMLElement)
+        const htmlBtn = btn as HTMLElement
+        htmlBtn.style.color = titleColor
+      })
     }
 
-    // Parallax total progress
-    headerMinHeight = toolbar.offsetHeight
-    let progress = (maximumHeight - scrollTop - headerMinHeight) / (maximumHeight - headerMinHeight)
-    progress = Math.max(progress, 0)
+    // .scroll-content
+    if (scrollContent) {
+      scrollContent.setAttribute('parallax', '')
+      scrollContent.style.paddingTop = `${maximumHeight + scrollContentPaddingTop - headerMinHeight}px`
+    }
 
-    // ion-header: set height
-    let targetHeight = maximumHeight - scrollTop
-    targetHeight = Math.max(targetHeight, headerMinHeight)
+    /** init events */
+    window.addEventListener(
+      'resize',
+      () => {
+        headerHeight = scrollContent.clientHeight
+      },
+      false
+    )
 
-    console.log(lastScrollTop, ticking, overlayButtons, translateAmt, scaleAmt)
-  }
+    if (scrollContent) {
+      scrollContent.addEventListener('scroll', (_e) => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            // to do
 
-  return {
-    onScroll,
+            const scrollTop = scrollContent.scrollTop
+            let translateAmt: number
+            let scaleAmt: number
+            if (scrollTop >= 0) {
+              translateAmt = scrollTop / 2
+              scaleAmt = 1
+            } else {
+              translateAmt = 0
+              scaleAmt = scrollTop / headerHeight + 1
+            }
+
+            // Parallax total progress
+            headerMinHeight = toolbar.offsetHeight
+
+            let progress = (maximumHeight - scrollTop - headerMinHeight) / (maximumHeight - headerMinHeight)
+            progress = Math.max(progress, 0)
+
+            let targetHeight = maximumHeight - scrollTop
+            targetHeight = Math.max(targetHeight, headerMinHeight)
+
+            header.style.transform = 'translate3d(0,' + translateAmt + 'px,0) scale(' + scaleAmt + ',' + scaleAmt + ')'
+
+            // .toolbar-background: change color
+            imageOverlay.style.height = `${targetHeight}px`
+            imageOverlay.style.opacity = `${progress}`
+            colorOverlay.style.height = `${targetHeight}px`
+            colorOverlay.style.opacity = targetHeight > headerMinHeight ? '1' : '0'
+            toolbarBackground.style.backgroundColor =
+              targetHeight > headerMinHeight ? 'transparent' : originalToolbarBgColor
+
+            // .bar-buttons
+            if (barButtons) {
+              if (targetHeight > headerMinHeight) {
+                imageOverlay.append(barButtons)
+                Array.from(barButtons.children).forEach((btn) => {
+                  const htmlBtn = btn as HTMLElement
+                  htmlBtn.style.color = titleColor
+                })
+              } else {
+                toolbar.append(barButtons)
+                Array.from(barButtons.children).forEach((btn) => {
+                  const htmlBtn = btn as HTMLElement
+                  htmlBtn.style.color = 'unset'
+                })
+              }
+            }
+          })
+        }
+        setTicking(true)
+      })
+    }
   }
 }
