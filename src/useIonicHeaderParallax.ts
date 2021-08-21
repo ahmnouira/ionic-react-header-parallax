@@ -37,11 +37,11 @@ export function useIonHeaderParallax({
     // ion-toolbar background
     const toolbarShadowRoot = toolbar.shadowRoot
 
-    if (!toolbarShadowRoot) throw new Error('No shadow')
+    // if (!toolbarShadowRoot) throw new Error('No shadow')
 
-    const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
+    const toolbarBackground = toolbarShadowRoot?.querySelector('.toolbar-background') as HTMLElement
 
-    if (!toolbarBackground) throw new Error('No .toolbar-background')
+    // if (!toolbarBackground) throw new Error('No .toolbar-background')
 
     // ion-title
     const ionTitle = toolbar.querySelector('ion-title') as HTMLElement
@@ -98,10 +98,11 @@ export function useIonHeaderParallax({
         window.getComputedStyle(scrollContent as Element, null).paddingTop.replace('px', '')
       )
     }
-
     let originalToolbarBgColor = 'white'
-    originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
 
+    if (toolbarBackground) {
+      originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
+    }
 
     // header and title
     header.style.position = 'relative'
