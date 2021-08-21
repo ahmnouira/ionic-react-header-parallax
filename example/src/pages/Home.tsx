@@ -14,7 +14,6 @@ import './Home.css'
 import { useIonHeaderParallax } from 'ionic-react-header-parallax'
 
 const Home: React.FC = () => {
-
   useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
 
   return (
