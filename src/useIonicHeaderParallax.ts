@@ -21,7 +21,7 @@ export function useIonHeaderParallax({
   React.useEffect(() => {
     setTimeout(() => {
       initElements()
-    }, 200)
+    }, 500)
   }, [titleColor, image, expandedColor, maximumHeight])
 
   const initElements = () => {
@@ -36,10 +36,13 @@ export function useIonHeaderParallax({
 
     // ion-toolbar background
     const toolbarShadowRoot = toolbar.shadowRoot
+
+    console.log(toolbarShadowRoot)
     if (!toolbarShadowRoot) throw new Error('No shadow')
     const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
 
-    if (!toolbarBackground) throw new Error('No .toolbar-background')
+    console.log(toolbarBackground)
+
 
     // ion-title
     const ionTitle = toolbar.querySelector('ion-title')
@@ -92,10 +95,10 @@ export function useIonHeaderParallax({
     let headerMinHeight = toolbar.offsetHeight
 
     let scrollContentPaddingTop: number = parseFloat(
-      window.getComputedStyle(scrollContent, null).paddingTop.replace('px', '')
+      window.getComputedStyle(scrollContent as Element, null).paddingTop.replace('px', '')
     )
 
-    const originalToolbarBgColor = window.getComputedStyle(toolbarBackground, null).backgroundColor
+    const originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
     if (!originalToolbarBgColor) {
       throw new Error('Error: toolbarBackround is null.')
     }
