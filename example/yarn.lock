@@ -5934,7 +5934,7 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-ionic-react-header-parallax@^0.1.1:
+ionic-react-header-parallax@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ionic-react-header-parallax/-/ionic-react-header-parallax-0.1.1.tgz#13b0c3579ecc2aa84746345f05c686644edb3d11"
   integrity sha512-pDUvPObUmFaGamFrFK3Vnz6eJ8PIFjaZwe3744rvxWNj5bdsSQXO8lwaJGdH4jKK5UCNd3dA+3OkSgUwXQVGyw==
