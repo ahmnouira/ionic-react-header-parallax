@@ -26,7 +26,7 @@ export function useIonHeaderParallax({
     setTimeout(() => {
       initElements()
     }, 300)
-  }, [titleColor, image, expandedColor, maximumHeight, ref])
+  }, [image, titleColor, expandedColor, maximumHeight, ref])
 
   const initElements = () => {
     // ion-header
@@ -206,7 +206,7 @@ export function useIonHeaderParallax({
     }
   }
 
-  
+
   return {
     ref,
   }
