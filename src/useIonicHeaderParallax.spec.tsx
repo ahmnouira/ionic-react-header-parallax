@@ -44,15 +44,12 @@ describe('IonHeaderParallax', () => {
 
   it('should render correctly', () => {
     const Component = () => {
-      useIonHeaderParallax({})
+      useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
       return Element
     }
-
     const { container } = render(<Component />)
     expect(container).toBeTruthy()
   })
-
-
 
   // Running all pending timers and switching to real timers using Jest
   afterEach(() => {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 export type UseIonHeaderParallaxInput = {
-  image?: string
+  image: string
   expandedColor?: string
   titleColor?: string
   maximumHeight?: number
@@ -10,8 +10,8 @@ export type UseIonHeaderParallaxInput = {
 export type UseIonHeaderParallaxResult = void
 
 export function useIonHeaderParallax({
+  image,
   titleColor = '#AAA',
-  image = 'https://picsum.photos/1080',
   expandedColor = '#313131',
   maximumHeight = 300,
 }: UseIonHeaderParallaxInput): UseIonHeaderParallaxResult {
@@ -67,7 +67,6 @@ export function useIonHeaderParallax({
 
     if (overlayTitle) {
       overlayTitle.classList.add('parallax-title')
-
       setTimeout(() => {
         if (overlayTitle.shadowRoot) {
           const toolbarTitle = overlayTitle.shadowRoot.querySelector('.toolbar-title') as HTMLElement
@@ -101,9 +100,7 @@ export function useIonHeaderParallax({
     }
 
     let originalToolbarBgColor = 'white'
-
     originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
-
 
 
     // header and title
