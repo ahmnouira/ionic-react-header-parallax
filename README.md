@@ -21,17 +21,19 @@
   <a href="https://david-dm.org/ahmnouira/ionic-react-header-parallax?type=dev"><img src="https://david-dm.org/ahmnouira/ionic-react-header-parallax/dev-status.svg"></a>
 </p>
 
-# Installation with npm
+## Installation with npm
 
 ```sh
 npm install ionic-react-header-parallax --save
 ```
 
+## Installation with yarn
+
 ```sh
 yarn add ionic-react-header-parallax
 ```
 
-# Example
+## Example
 
 ```tsx
 import * as React from 'react'
@@ -76,8 +78,8 @@ const Home: React.FC = () => {
 
 ```
 
-# API
+## API
 
-- [useIonHeaderParallax](https://github.com/ahmnouira/hooks#ionic-react-header-parallax)
+- [useIonHeaderParallax](https://github.com/ahmnouira/ionic-react-header-parallax#useIonHeaderParallax)
 
-## `useIonHeaderParallax`
+### `useIonHeaderParallax`
