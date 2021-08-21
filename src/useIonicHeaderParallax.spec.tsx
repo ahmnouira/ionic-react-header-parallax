@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from '@testing-library/react/'
-import { useIonHeaderParallax } from './useIonicHeaderParallax'
+// import { useIonHeaderParallax } from './useIonicHeaderParallax'
 import {
   IonBackButton,
   IonButton,
@@ -42,8 +42,9 @@ describe('IonHeaderParallax', () => {
   })
 
   it('should render correctly', () => {
+
     const Component = () => {
-      useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
+      // useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
       return Element
     }
     const { container } = render(<Component />)

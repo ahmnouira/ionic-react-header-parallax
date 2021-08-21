@@ -36,25 +36,21 @@ export function useIonHeaderParallax({
 
     // ion-toolbar background
     const toolbarShadowRoot = toolbar.shadowRoot
-
-    if (!toolbarShadowRoot) return
-
+    if (!toolbarShadowRoot) throw new Error('No shadow')
     const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
 
-    if (!toolbarBackground) return
+    if (!toolbarBackground) throw new Error('No .toolbar-background')
 
     // ion-title
-    const ionTitle = toolbar.querySelector('ion-title') as HTMLElement
+    const ionTitle = toolbar.querySelector('ion-title')
 
     // ion-buttons
     const barButtons = header.querySelector('ion-buttons') as HTMLElement
 
     // ion-content
-    const ionContent = parentElement.querySelector('ion-content') as HTMLElement
-    if (!ionContent) throw new Error('Parallax an <ion-content> element on the page to work.')
-
+    const ionContent = parentElement.querySelector('ion-content')
+    if (!ionContent) throw new Error('Parallax requires an <ion-content> element on the page to work.')
     const scrollContent = ionContent.shadowRoot?.querySelector('.inner-scroll') as HTMLElement
-
     if (!scrollContent) {
       throw new Error('Parallax directive requires an <ion-content> element on the page to work.')
     }
@@ -71,6 +67,7 @@ export function useIonHeaderParallax({
 
     if (overlayTitle) {
       overlayTitle.classList.add('parallax-title')
+
       setTimeout(() => {
         if (overlayTitle.shadowRoot) {
           const toolbarTitle = overlayTitle.shadowRoot.querySelector('.toolbar-title') as HTMLElement
@@ -88,24 +85,19 @@ export function useIonHeaderParallax({
 
     /***  initStyles ***/
     // still in init use JS DOM
-    let headerHeight = scrollContent?.clientHeight
     setTicking(false)
 
     // fetch styles
     maximumHeight = parseFloat(maximumHeight.toString())
     let headerMinHeight = toolbar.offsetHeight
 
-    let scrollContentPaddingTop = 0
+    let scrollContentPaddingTop: number = parseFloat(
+      window.getComputedStyle(scrollContent, null).paddingTop.replace('px', '')
+    )
 
-    if (scrollContent) {
-      scrollContentPaddingTop = parseFloat(
-        window.getComputedStyle(scrollContent as Element, null).paddingTop.replace('px', '')
-      )
-    }
-    let originalToolbarBgColor = 'white'
-
-    if (toolbarBackground) {
-      originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
+    const originalToolbarBgColor = window.getComputedStyle(toolbarBackground, null).backgroundColor
+    if (!originalToolbarBgColor) {
+      throw new Error('Error: toolbarBackround is null.')
     }
 
     // header and title
@@ -139,9 +131,7 @@ export function useIonHeaderParallax({
     imageOverlay.style.backgroundPosition = 'center'
 
     // .toolbar-background
-    if (toolbarBackground) {
-      toolbarBackground.style.backgroundColor = originalToolbarBgColor
-    }
+    toolbarBackground.style.backgroundColor = originalToolbarBgColor
 
     // .bar-buttons
     if (barButtons) {
@@ -160,14 +150,6 @@ export function useIonHeaderParallax({
       scrollContent.style.paddingTop = `${maximumHeight + scrollContentPaddingTop - headerMinHeight}px`
     }
 
-    /** init events */
-    window.addEventListener(
-      'resize',
-      () => {
-        headerHeight = scrollContent.clientHeight
-      },
-      false
-    )
 
     if (scrollContent) {
       scrollContent.addEventListener('scroll', (_e) => {
@@ -176,15 +158,6 @@ export function useIonHeaderParallax({
             // to do
 
             const scrollTop = scrollContent.scrollTop
-            let translateAmt: number
-            let scaleAmt: number
-            if (scrollTop >= 0) {
-              translateAmt = scrollTop / 2
-              scaleAmt = 1
-            } else {
-              translateAmt = 0
-              scaleAmt = scrollTop / headerHeight + 1
-            }
 
             // Parallax total progress
             headerMinHeight = toolbar.offsetHeight
@@ -194,8 +167,6 @@ export function useIonHeaderParallax({
 
             let targetHeight = maximumHeight - scrollTop
             targetHeight = Math.max(targetHeight, headerMinHeight)
-
-            header.style.transform = 'translate3d(0,' + translateAmt + 'px,0) scale(' + scaleAmt + ',' + scaleAmt + ')'
 
             // .toolbar-background: change color
             imageOverlay.style.height = `${targetHeight}px`
