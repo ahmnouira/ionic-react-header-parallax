@@ -138,7 +138,7 @@ export function useIonHeaderParallax({
       barButtons.style.pointerEvents = 'all'
 
       Array.from(barButtons.children).forEach((btn) => {
-        console.log(btn, btn as HTMLElement)
+        // console.log(btn, btn as HTMLElement)
         const htmlBtn = btn as HTMLElement
         htmlBtn.style.color = titleColor
       })

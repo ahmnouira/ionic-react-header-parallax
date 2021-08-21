@@ -5934,10 +5934,10 @@ internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-ionic-react-header-parallax@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/ionic-react-header-parallax/-/ionic-react-header-parallax-0.1.1.tgz#13b0c3579ecc2aa84746345f05c686644edb3d11"
-  integrity sha512-pDUvPObUmFaGamFrFK3Vnz6eJ8PIFjaZwe3744rvxWNj5bdsSQXO8lwaJGdH4jKK5UCNd3dA+3OkSgUwXQVGyw==
+ionic-react-header-parallax@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ionic-react-header-parallax/-/ionic-react-header-parallax-0.1.2.tgz#c3bc18851a44f9e6ab9a4b7491c9fb73e14e09ea"
+  integrity sha512-H8eUoyr2q58s5AGhU/VDwLRNt8IAfgBVg/V7fdqFp8R/hBsLg/bI6gOr8gM/JuncLzjrKm2D4xOeUrQyZetR0g==
 
 ionicons@5.5.3, ionicons@^5.1.2, ionicons@^5.5.3:
   version "5.5.3"
