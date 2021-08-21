@@ -37,11 +37,11 @@ export function useIonHeaderParallax({
     // ion-toolbar background
     const toolbarShadowRoot = toolbar.shadowRoot
 
-    // if (!toolbarShadowRoot) throw new Error('No shadow')
+    if (!toolbarShadowRoot) return
 
-    const toolbarBackground = toolbarShadowRoot?.querySelector('.toolbar-background') as HTMLElement
+    const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
 
-    // if (!toolbarBackground) throw new Error('No .toolbar-background')
+    if (!toolbarBackground) return
 
     // ion-title
     const ionTitle = toolbar.querySelector('ion-title') as HTMLElement
@@ -52,8 +52,12 @@ export function useIonHeaderParallax({
     // ion-content
     const ionContent = parentElement.querySelector('ion-content') as HTMLElement
     if (!ionContent) throw new Error('Parallax an <ion-content> element on the page to work.')
+
     const scrollContent = ionContent.shadowRoot?.querySelector('.inner-scroll') as HTMLElement
 
+    if (!scrollContent) {
+      throw new Error('Parallax directive requires an <ion-content> element on the page to work.')
+    }
 
     // create image overly
     const imageOverlay = document.createElement('div')

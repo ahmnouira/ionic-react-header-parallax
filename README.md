@@ -1,6 +1,6 @@
-<h4 align="center">
-    <b>Ionic React</b> libray to handle the parallax effect for <b>IonHeader</b> component
-</h4>
+<h1 align="center">
+    <b>Easy to use hook to handle the parallax effect for <b>IonHeader</b> component React Ionic.
+</h1>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/ionic-react-header-parallax
@@ -20,3 +20,64 @@
   <a href="https://david-dm.org/ahmnouira/ionic-react-header-parallax"><img src="https://david-dm.org/ahmnouira/ionic-react-header-parallax/status.svg"></a>
   <a href="https://david-dm.org/ahmnouira/ionic-react-header-parallax?type=dev"><img src="https://david-dm.org/ahmnouira/ionic-react-header-parallax/dev-status.svg"></a>
 </p>
+
+# Installation with npm
+
+```sh
+npm install ionic-react-header-parallax --save
+```
+
+```sh
+yarn add ionic-react-header-parallax
+```
+
+# Example
+
+```tsx
+import * as React from 'react'
+import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/react'
+import { Lorem } from '../components/Lorem'
+import './Home.css'
+import { useIonHeaderParallax } from 'ionic-react-header-parallax'
+
+const Home: React.FC = () => {
+
+  useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
+
+  return (
+    <IonPage>
+      <IonHeader translucent>
+        <IonToolbar mode="ios">
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
+          <IonTitle>Post Details</IonTitle>
+          <IonButtons slot="end">
+            <IonButton>Button</IonButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent className="ion-padding">
+        {...}
+      </IonContent>
+    </IonPage>
+  )
+}
+
+```
+
+# API
+
+- [useIonHeaderParallax](https://github.com/ahmnouira/hooks#ionic-react-header-parallax)
+
+## `useIonHeaderParallax`

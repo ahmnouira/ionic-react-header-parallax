@@ -38,6 +38,7 @@ const Element: JSX.Element = (
 
 describe('IonHeaderParallax', () => {
 
+  
   beforeEach(() => {
     jest.useFakeTimers()
   })
@@ -51,9 +52,11 @@ describe('IonHeaderParallax', () => {
     expect(container).toBeTruthy()
   })
 
+  
   // Running all pending timers and switching to real timers using Jest
   afterEach(() => {
     jest.runOnlyPendingTimers()
     jest.useRealTimers()
   })
+  
 })
