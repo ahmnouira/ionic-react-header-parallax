@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 export type UseIonHeaderParallaxInput = {
   image: string
   expandedColor?: string
@@ -5,6 +7,8 @@ export type UseIonHeaderParallaxInput = {
   maximumHeight?: number
 }
 
-export type UseIonHeaderParallaxResult = void
+export type UseIonHeaderParallaxResult = {
+  ref: React.RefObject<any>
+}
 
 export function useIonHeaderParallax(input: UseIonHeaderParallaxInput): UseIonHeaderParallaxResult

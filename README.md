@@ -51,17 +51,15 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react'
-import { Lorem } from '../components/Lorem'
-import './Home.css'
 import { useIonHeaderParallax } from 'ionic-react-header-parallax'
 
 const Home: React.FC = () => {
 
-  useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
+ const {ref} = useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
 
   return (
     <IonPage>
-      <IonHeader translucent>
+      <IonHeader translucent ref={ref}>
         <IonToolbar mode="ios">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />

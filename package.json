@@ -1,6 +1,6 @@
 {
   "name": "ionic-react-header-parallax",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Easy to use hook to handle the parallax effect for IonHeader component in React Ionic",
   "author": {
     "name": "Ahmd Nouira",

@@ -42,7 +42,6 @@ describe('IonHeaderParallax', () => {
   })
 
   it('should render correctly', () => {
-
     const Component = () => {
       // useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
       return Element
