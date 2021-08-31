@@ -38,6 +38,11 @@
     "workbox-streams": "5.1.4"
   },
   "scripts": {
+    "android:certif": "cd android && ./gradlew signingReport",
+    "android:clean": "cd android && ./gradlew clean",
+    "android:debug": "cd android && ./gradlew installDebug",
+    "android:debugLog": "adb -d logcat com.ahmnouira.ionicReactPush:I *:S",
+    "update": "ionic cap copy && ionic cap sync",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
