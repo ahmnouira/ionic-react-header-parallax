@@ -1983,10 +1983,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-16.7.1.tgz"
   integrity sha512-ncRdc45SoYJ2H4eWU9ReDfp3vtFqDYhjOsKlFFUDEn8V1Bgr2RjYal8YT5byfadWIRluhPFU6JiDOl0H6Sl87A==
 
-"@types/node@12.20.20":
-  version "12.20.20"
-  resolved "https://registry.npmjs.org/@types/node/-/node-12.20.20.tgz"
-  integrity sha512-kqmxiJg4AT7rsSPIhO6eoBIx9mNwwpeH42yjtgQh6X2ANSpLpvToMXv+LMFdfxpwG1FZXZ41OGZMiUAtbBLEvg==
+"@types/node@12.20.43":
+  version "12.20.43"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.20.43.tgz"
+  integrity sha512-HCfJdaYqJX3BCzeihgZrD7b85Cu05OC/GVJ4kEYIflwUs4jbnUlLLWoq7hw1LBcdvUyehO+gr6P5JQ895/2ZfA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
