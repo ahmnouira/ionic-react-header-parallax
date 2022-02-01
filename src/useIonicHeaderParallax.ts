@@ -147,7 +147,7 @@ export function useIonHeaderParallax({
       // .scroll-content
       if (scrollContent) {
         scrollContent.setAttribute('parallax', '')
-        scrollContent.style.paddingTop = `250px`
+        scrollContent.style.paddingTop = `${maximumHeight}px`
       }
 
       if (scrollContent) {
