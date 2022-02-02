@@ -21,7 +21,6 @@
   <a href="https://www.npmjs.com/package/ionic-react-header-parallax"><img src="https://img.shields.io/npm/dt/ionic-react-header-parallax.svg?style=for-the-badge"></a>
 </p>
 
-
 ## [Live Demo](https://github-mjaqg5-pzh6fv.stackblitz.io)
 
 ## [Stackblitz Editor URL](https://stackblitz.com/edit/github-mjaqg5-pzh6fv?file=src/pages/Home.tsx)

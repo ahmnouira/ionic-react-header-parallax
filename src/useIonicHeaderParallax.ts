@@ -5,28 +5,38 @@ export type UseIonHeaderParallaxInput = {
   expandedColor?: string
   titleColor?: string
   maximumHeight?: number
+  defaultImage: string
+  showBarButtons?: boolean
 }
 
 export type UseIonHeaderParallaxResult = {
   ref: React.RefObject<any>
+  loading: boolean
 }
 
 export function useIonHeaderParallax({
   image,
+  defaultImage = image,
   titleColor = '#AAA',
   expandedColor = '#313131',
   maximumHeight = 300,
+  showBarButtons = false,
 }: UseIonHeaderParallaxInput): UseIonHeaderParallaxResult {
-  /** styles */
   const [ticking, setTicking] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   const ref: React.RefObject<any> = React.useRef<any>(null)
 
   React.useEffect(() => {
-    setTimeout(() => {
+    setLoading(true)
+    const timeout = setTimeout(() => {
       initElements()
+      setLoading(false)
     }, 300)
-  }, [image, titleColor, expandedColor, maximumHeight, ref])
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [image, titleColor, expandedColor, maximumHeight, ref.current])
 
   const initElements = () => {
     // ion-header
@@ -37,7 +47,7 @@ export function useIonHeaderParallax({
 
       // ion-toolbar
       const toolbar = header.querySelector('ion-toolbar') as HTMLElement
-      if (!toolbar) throw new Error('No <ion-toolbar>')
+      if (!toolbar) throw new Error('Parallax requires an <ion-toolbar> element on the page to work')
 
       // ion-toolbar background
       const toolbarShadowRoot = toolbar.shadowRoot
@@ -56,10 +66,11 @@ export function useIonHeaderParallax({
       if (!ionContent) throw new Error('Parallax requires an <ion-content> element on the page to work.')
       const scrollContent = ionContent.shadowRoot?.querySelector('.inner-scroll') as HTMLElement
       if (!scrollContent) {
-        throw new Error('Parallax directive requires an <ion-content> element on the page to work.')
+        return
+        //throw new Error('Parallax directive requires an <ion-content> element on the page to work.')
       }
 
-      // create image overly
+      // create image overlay
       const imageOverlay = document.createElement('div')
       imageOverlay.classList.add('image-overlay')
       const colorOverlay = document.createElement('div')
@@ -69,20 +80,6 @@ export function useIonHeaderParallax({
 
       const overlayTitle = ionTitle && (ionTitle.cloneNode(true) as HTMLElement)
 
-      if (overlayTitle) {
-        overlayTitle.classList.add('parallax-title')
-
-        setTimeout(() => {
-          if (overlayTitle.shadowRoot) {
-            const toolbarTitle = overlayTitle.shadowRoot.querySelector('.toolbar-title') as HTMLElement
-            toolbarTitle.style.pointerEvents = 'unset'
-          }
-        }, 200)
-      }
-
-      if (overlayTitle) {
-        imageOverlay.appendChild(overlayTitle)
-      }
       if (barButtons) {
         imageOverlay.appendChild(barButtons)
       }
@@ -91,10 +88,9 @@ export function useIonHeaderParallax({
       // still in init use JS DOM
       setTicking(false)
 
-      // fetch styles
       maximumHeight = parseFloat(maximumHeight.toString())
       let headerMinHeight = toolbar.offsetHeight
-
+      // fetch styles
       const originalToolbarBgColor = window.getComputedStyle(toolbarBackground as Element, null).backgroundColor
       if (!originalToolbarBgColor) {
         throw new Error('Error: toolbarBackround is null.')
@@ -104,6 +100,13 @@ export function useIonHeaderParallax({
       header.style.position = 'relative'
 
       if (overlayTitle) {
+        setTimeout(() => {
+          if (overlayTitle.shadowRoot) {
+            const toolbarTitle = overlayTitle.shadowRoot.querySelector('.toolbar-title') as HTMLElement
+            toolbarTitle.style.pointerEvents = 'unset'
+          }
+        }, 200)
+        imageOverlay.appendChild(overlayTitle)
         overlayTitle.style.color = titleColor
         overlayTitle.style.position = 'absolute'
         overlayTitle.style.width = '100%'
@@ -123,7 +126,7 @@ export function useIonHeaderParallax({
 
       // image overlay
       imageOverlay.style.backgroundColor = expandedColor
-      imageOverlay.style.backgroundImage = `url(${image})`
+      imageOverlay.style.backgroundImage = `url(${image || defaultImage})`
       imageOverlay.style.height = '100%'
       imageOverlay.style.width = '100%'
       imageOverlay.style.pointerEvents = 'none'
@@ -136,7 +139,6 @@ export function useIonHeaderParallax({
       // .bar-buttons
       if (barButtons) {
         barButtons.style.pointerEvents = 'all'
-
         Array.from(barButtons.children).forEach((btn) => {
           // console.log(btn, btn as HTMLElement)
           const htmlBtn = btn as HTMLElement
@@ -146,11 +148,7 @@ export function useIonHeaderParallax({
 
       // .scroll-content
       if (scrollContent) {
-        scrollContent.setAttribute('parallax', '')
         scrollContent.style.paddingTop = `${maximumHeight}px`
-      }
-
-      if (scrollContent) {
         scrollContent.addEventListener('scroll', (_e) => {
           if (!ticking) {
             window.requestAnimationFrame(() => {
@@ -172,22 +170,30 @@ export function useIonHeaderParallax({
               imageOverlay.style.opacity = `${progress}`
               colorOverlay.style.height = `${targetHeight}px`
               colorOverlay.style.opacity = targetHeight > headerMinHeight ? '1' : '0'
+
+              /* TODO: add support for dark mode for toolbar*/
               toolbarBackground.style.backgroundColor =
                 targetHeight > headerMinHeight ? 'transparent' : originalToolbarBgColor
 
               // .bar-buttons
-              if (barButtons) {
+              if (barButtons && showBarButtons) {
                 if (targetHeight > headerMinHeight) {
                   imageOverlay.append(barButtons)
                   Array.from(barButtons.children).forEach((btn) => {
                     const htmlBtn = btn as HTMLElement
-                    htmlBtn.style.color = titleColor
+                    if (htmlBtn) {
+                      htmlBtn.style.color = titleColor
+                      // allow custom styles TODO
+                    }
                   })
                 } else {
                   toolbar.append(barButtons)
                   Array.from(barButtons.children).forEach((btn) => {
                     const htmlBtn = btn as HTMLElement
-                    htmlBtn.style.color = 'unset'
+                    if (htmlBtn) {
+                      htmlBtn.style.color = 'unset'
+                      // allow custom styles TODO
+                    }
                   })
                 }
               }
@@ -201,5 +207,6 @@ export function useIonHeaderParallax({
 
   return {
     ref,
+    loading,
   }
 }
