@@ -24,12 +24,10 @@
 ## Overview
 
 <p align="center">
-<img hight="120px;" src="images/demo.gif"></img>
-[Youtube video URL](https://www.youtube.com/watch?v=YZ5nlRjstA4)
+<img hight="60px;" src="images/demo.gif"></img>
 </p>
 
-## [Stackblitz Editor URL](https://stackblitz.com/edit/github-mjaqg5-pzh6fv?file=src/pages/Home.tsx)
-
+## [Youtube video URL](https://www.youtube.com/watch?v=YZ5nlRjstA4)
 ## Installation with npm
 
 ```sh
