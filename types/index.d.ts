@@ -5,7 +5,7 @@ export type UseIonHeaderParallaxInput = {
   expandedColor?: string
   titleColor?: string
   maximumHeight?: number
-  defaultImage: string
+  defaultImage?: string
   showBarButtons?: boolean
 }
 
