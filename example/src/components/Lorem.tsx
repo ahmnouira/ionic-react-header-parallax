@@ -1,4 +1,3 @@
-import * as React from 'react'
 import './Lorem.css'
 
 export const Lorem: React.FC<{}> = ({}) => {

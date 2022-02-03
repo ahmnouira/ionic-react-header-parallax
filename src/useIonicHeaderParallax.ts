@@ -55,9 +55,6 @@ export function useIonHeaderParallax({
       if (!toolbarShadowRoot) throw new Error('No shadow')
       const toolbarBackground = toolbarShadowRoot.querySelector('.toolbar-background') as HTMLElement
 
-      // ion-title
-      const ionTitle = toolbar.querySelector('ion-title')
-
       // ion-buttons
       const barButtons = header.querySelector('ion-buttons') as HTMLElement
 
@@ -78,8 +75,6 @@ export function useIonHeaderParallax({
       colorOverlay.appendChild(imageOverlay)
       header.appendChild(colorOverlay)
 
-      const overlayTitle = ionTitle && (ionTitle.cloneNode(true) as HTMLElement)
-
       if (barButtons) {
         imageOverlay.appendChild(barButtons)
       }
@@ -98,21 +93,6 @@ export function useIonHeaderParallax({
 
       // header and title
       header.style.position = 'relative'
-
-      if (overlayTitle) {
-        setTimeout(() => {
-          if (overlayTitle.shadowRoot) {
-            const toolbarTitle = overlayTitle.shadowRoot.querySelector('.toolbar-title') as HTMLElement
-            toolbarTitle.style.pointerEvents = 'unset'
-          }
-        }, 200)
-        imageOverlay.appendChild(overlayTitle)
-        overlayTitle.style.color = titleColor
-        overlayTitle.style.position = 'absolute'
-        overlayTitle.style.width = '100%'
-        overlayTitle.style.height = '100%'
-        overlayTitle.style.textAlign = 'center'
-      }
 
       // color overlay
       colorOverlay.style.backgroundColor = originalToolbarBgColor
@@ -147,7 +127,7 @@ export function useIonHeaderParallax({
 
       // .scroll-content
       if (scrollContent) {
-        scrollContent.style.paddingTop = `${maximumHeight}px`
+        scrollContent.style.paddingTop = `${imageOverlay.clientHeight - toolbar.clientHeight}px`
         scrollContent.addEventListener('scroll', (_e) => {
           if (!ticking) {
             window.requestAnimationFrame(() => {
