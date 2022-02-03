@@ -21,7 +21,12 @@
   <a href="https://www.npmjs.com/package/ionic-react-header-parallax"><img src="https://img.shields.io/npm/dt/ionic-react-header-parallax.svg?style=for-the-badge"></a>
 </p>
 
-## [Live Demo](https://github-mjaqg5-pzh6fv.stackblitz.io)
+## Overview
+
+<p align="center">
+<img hight="120px;" src="images/demo.gif"></img>
+[Youtube video URL](https://www.youtube.com/watch?v=YZ5nlRjstA4)
+</p>
 
 ## [Stackblitz Editor URL](https://stackblitz.com/edit/github-mjaqg5-pzh6fv?file=src/pages/Home.tsx)
 
@@ -41,42 +46,35 @@ yarn add ionic-react-header-parallax
 
 ```tsx
 import * as React from 'react'
-import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/react'
+import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import { useIonHeaderParallax } from 'ionic-react-header-parallax'
 
 const Home: React.FC = () => {
 
- const {ref} = useIonHeaderParallax({ image: 'https://picsum.photos/1080' })
+   const { ref } = useIonHeaderParallax({
+    image: 'https://picsum.photos/1080',
+    showBarButtons: true,
+  })
 
   return (
     <IonPage>
-      <IonHeader translucent ref={ref}>
-        <IonToolbar mode="ios">
+      <IonHeader ref={ref}>
+        <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/" />
           </IonButtons>
-          <IonTitle>Post Details</IonTitle>
-          <IonButtons slot="end">
-            <IonButton>Button</IonButton>
-          </IonButtons>
+          <IonTitle>Post Title</IonTitle>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding-start ion-padding-end">
         {...}
       </IonContent>
     </IonPage>
   )
 }
+
+export default Home
 
 ```
 
