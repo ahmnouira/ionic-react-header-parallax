@@ -1,6 +1,6 @@
 import './Lorem.css'
 
-export const Lorem: React.FC<{}> = ({}) => {
+export const Lorem: React.FC = () => {
   return (
     <div>
       <p className="lorem">

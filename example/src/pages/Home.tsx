@@ -6,7 +6,7 @@ import './Home.css'
 import { useIonHeaderParallax } from 'ionic-react-header-parallax'
 
 const Home: React.FC = () => {
-  const { ref, loading } = useIonHeaderParallax({
+  const { ref } = useIonHeaderParallax({
     image: 'https://picsum.photos/1080',
     titleColor: 'black',
     showBarButtons: true,
