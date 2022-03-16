@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ionic/react": "6.0.5",
-    "@ionic/react-router": "6.0.5",
+    "@ionic/react-router": "6.0.12",
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "12.8.3",
