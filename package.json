@@ -60,7 +60,7 @@
     "@testing-library/react": "12.1.2",
     "@types/jest": "27.4.0",
     "@types/node": "17.0.14",
-    "@types/react": "17.0.38",
+    "@types/react": "17.0.52",
     "auto-changelog": "2.4.0",
     "babel-jest": "27.4.6",
     "codecov": "3.8.3",
