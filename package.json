@@ -64,7 +64,7 @@
     "auto-changelog": "2.4.0",
     "babel-jest": "27.4.6",
     "codecov": "3.8.3",
-    "eslint": "8.10.0",
+    "eslint": "8.57.1",
     "jest": "27.4.7",
     "np": "7.6.1",
     "prettier": "2.5.1",
