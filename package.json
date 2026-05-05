@@ -53,9 +53,9 @@
     "release": "np --no-2fa"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.16.11",
-    "@babel/preset-react": "7.16.7",
-    "@babel/preset-typescript": "7.16.7",
+    "@babel/preset-env": "7.29.5",
+    "@babel/preset-react": "7.28.5",
+    "@babel/preset-typescript": "7.28.5",
     "@ionic/react": "6.0.5",
     "@testing-library/react": "12.1.2",
     "@types/jest": "27.4.0",
