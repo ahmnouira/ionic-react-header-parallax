@@ -1,9 +1,12 @@
 import {
+  IonBackButton,
+  IonButtons,
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
+  IonMenuButton,
 } from "@ionic/react";
 import "./Home.css";
 import { Lorem } from "../components/Lorem";
@@ -14,23 +17,29 @@ import { useIonHeaderParallax } from "ionic-react-header-parallax";
 const Home: React.FC = () => {
   const { ref } = useIonHeaderParallax({
     image: "https://picsum.photos/1080",
-    titleColor: "black",
+    buttonsToShow: "end",
     showBarButtons: true,
+    titleColor: "white",
+    titleStyle: {
+      transition: "all 1s ease",
+      color: "gold",
+    },
   });
 
   return (
     <IonPage>
       <IonHeader ref={ref}>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="#" />
+          </IonButtons>
+          <IonButtons slot="end">
+            <IonMenuButton autoHide={false} />
+          </IonButtons>
+          <IonTitle>Post Title</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <Container>
           {Array(20)
             .fill(1)
