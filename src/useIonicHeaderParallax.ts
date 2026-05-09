@@ -58,6 +58,8 @@ export function useIonHeaderParallax({
       // ion-buttons
       const barButtons = header.querySelector('ion-buttons') as HTMLElement
 
+      const endBarButtons = header.querySelector('ion-buttons[slot="end"]') as HTMLElement
+
       // ion-content
       const ionContent = parentElement.querySelector('ion-content')
       if (!ionContent) throw new Error('Parallax requires an <ion-content> element on the page to work.')
@@ -77,6 +79,10 @@ export function useIonHeaderParallax({
 
       if (barButtons) {
         imageOverlay.appendChild(barButtons)
+      }
+
+      if (endBarButtons) {
+        imageOverlay.appendChild(endBarButtons)
       }
 
       /***  initStyles ***/
@@ -112,6 +118,9 @@ export function useIonHeaderParallax({
       imageOverlay.style.pointerEvents = 'none'
       imageOverlay.style.backgroundSize = 'cover'
       imageOverlay.style.backgroundPosition = 'center'
+      imageOverlay.style.display = 'flex'
+      imageOverlay.style.justifyContent = 'space-between'
+      imageOverlay.style.alignItems = 'flex-start'
 
       // .toolbar-background
       toolbarBackground.style.backgroundColor = originalToolbarBgColor
@@ -124,7 +133,13 @@ export function useIonHeaderParallax({
           htmlBtn.style.color = titleColor
         })
       }
-
+      if (endBarButtons) {
+        endBarButtons.style.pointerEvents = 'all'
+        Array.from(endBarButtons.children).forEach((btn) => {
+          const htmlBtn = btn as HTMLElement
+          htmlBtn.style.color = titleColor
+        })
+      }
       // .scroll-content
       if (scrollContent) {
         scrollContent.style.paddingTop = `${imageOverlay.clientHeight - toolbar.clientHeight}px`
@@ -158,6 +173,8 @@ export function useIonHeaderParallax({
               if (barButtons && showBarButtons) {
                 if (targetHeight > headerMinHeight) {
                   imageOverlay.append(barButtons)
+                  imageOverlay.append(endBarButtons)
+
                   Array.from(barButtons.children).forEach((btn) => {
                     const htmlBtn = btn as HTMLElement
                     if (htmlBtn) {
@@ -167,6 +184,8 @@ export function useIonHeaderParallax({
                   })
                 } else {
                   toolbar.append(barButtons)
+                  toolbar.append(endBarButtons)
+
                   Array.from(barButtons.children).forEach((btn) => {
                     const htmlBtn = btn as HTMLElement
                     if (htmlBtn) {
