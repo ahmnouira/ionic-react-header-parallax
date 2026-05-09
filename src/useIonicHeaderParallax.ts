@@ -10,6 +10,10 @@ export function useIonHeaderParallax({
   maximumHeight = 300,
   wait = 300,
   showBarButtons = false,
+  buttonsToShow,
+  titleStyle,
+  endButtonStyle,
+  startButtonStyle,
 }: UseIonHeaderParallaxInput): UseIonHeaderParallaxResult {
   const [ticking, setTicking] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -176,23 +180,77 @@ export function useIonHeaderParallax({
               if (targetHeight > headerMinHeight) {
                 imageOverlay.append(barButtons);
                 imageOverlay.append(endBarButtons);
+                barButtons.removeAttribute("style");
+                endBarButtons.removeAttribute("style");
 
                 Array.from(barButtons.children).forEach((btn) => {
-                  const htmlBtn = btn as HTMLElement;
+                  let htmlBtn = btn as HTMLElement;
                   if (htmlBtn) {
                     htmlBtn.style.color = titleColor;
-                    // allow custom styles TODO
                   }
                 });
               } else {
-                toolbar.append(barButtons);
-                toolbar.append(endBarButtons);
+                if (buttonsToShow === "start") {
+                  toolbar.append(barButtons);
+                } else if (buttonsToShow === "end") {
+                  toolbar.append(endBarButtons);
+                } else {
+                  toolbar.append(barButtons);
+                  toolbar.append(endBarButtons);
+                }
 
-                Array.from(barButtons.children).forEach((btn) => {
-                  const htmlBtn = btn as HTMLElement;
+                Array.from(toolbar.children).forEach((btn) => {
+                  let htmlBtn = btn as HTMLElement;
                   if (htmlBtn) {
-                    htmlBtn.style.color = "unset";
-                    // allow custom styles TODO
+                    htmlBtn.style.color = titleColor;
+                    const isEndButtons =
+                      htmlBtn.tagName === "ION-BUTTONS" &&
+                      htmlBtn.getAttribute("slot") === "end";
+
+                    const isStartButtons =
+                      htmlBtn.tagName === "ION-BUTTONS" &&
+                      htmlBtn.getAttribute("slot") === "start";
+
+                    const isTitle = htmlBtn.tagName === "ION-TITLE";
+
+                    if (isEndButtons) {
+                      htmlBtn.style.padding = "0px";
+                      htmlBtn.style.margin = "0px";
+                      if (endButtonStyle) {
+                        Object.keys(endButtonStyle).forEach((p) => {
+                          const s = endButtonStyle[p as any];
+                          if (s) {
+                            htmlBtn.style[p as any] = s;
+                          }
+                        });
+                      } else {
+                        htmlBtn.style.color = titleColor;
+                      }
+                    } else if (isStartButtons) {
+                      htmlBtn.style.padding = "0px";
+                      htmlBtn.style.margin = "0px";
+                      if (startButtonStyle) {
+                        Object.keys(startButtonStyle).forEach((p) => {
+                          const s = startButtonStyle[p as any];
+                          if (s) {
+                            htmlBtn.style[p as any] = s;
+                          }
+                        });
+                      } else {
+                        htmlBtn.style.color = titleColor;
+                      }
+                    } else if (isTitle) {
+                      if (titleStyle) {
+                        Object.keys(titleStyle).forEach((p) => {
+                          const s = titleStyle[p as any];
+                          if (s) {
+                            htmlBtn.style[p as any] = s;
+                          }
+                        });
+                      } else {
+                        htmlBtn.style.color = titleColor;
+                      }
+                    }
                   }
                 });
               }

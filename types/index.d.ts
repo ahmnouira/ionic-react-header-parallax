@@ -7,6 +7,11 @@ export type UseIonHeaderParallaxInput = {
   maximumHeight?: number;
   defaultImage?: string;
   showBarButtons?: boolean;
+  wait?: number;
+  buttonsToShow?: "start" | "end";
+  titleStyle?: Partial<CSSStyleDeclaration>;
+  endButtonStyle?: Partial<CSSStyleDeclaration>;
+  startButtonStyle?: Partial<CSSStyleDeclaration>;
 };
 
 export type UseIonHeaderParallaxResult = {
