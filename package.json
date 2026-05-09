@@ -79,6 +79,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "resolutions": {
-    "jest": "26.6.3"
+    "jest": "30.4.2"
   }
 }
