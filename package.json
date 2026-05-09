@@ -4,7 +4,7 @@
   "description": "Easy to use hook to handle the parallax effect for IonHeader component in React Ionic",
   "author": {
     "name": "Ahmed Nouira",
-    "email": "ahmnouira@gmail.comm"
+    "email": "ahmnouira@gmail.com"
   },
   "license": "MIT",
   "repository": {
@@ -26,7 +26,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/ahmnouira/ionic-react-header-parallax.git/issues"
+    "url": "https://github.com/ahmnouira/ionic-react-header-parallax/issues"
   },
   "files": [
     "dist/",

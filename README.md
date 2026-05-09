@@ -1,6 +1,8 @@
-<h1 align="center">
-    Easy to use hook to handle the parallax effect for <b>IonHeader</b> component in React Ionic.
-</h1>
+<h1 align="center">ionic-react-header-parallax</h1>
+
+<p align="center">
+  Easy-to-use React hook to add a parallax header effect to Ionic `IonHeader`.
+</p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/ionic-react-header-parallax
@@ -23,36 +25,54 @@
 
 ## Overview
 
+`ionic-react-header-parallax` exposes a single hook: `useIonHeaderParallax`.
+Attach the returned `ref` to your `IonHeader`, and the hook handles:
+
+- Header image expansion/collapse on scroll
+- Toolbar background transitions
+- Optional movement/styling of header buttons
+- Dynamic title/button styles when collapsed
+
 <p align="center">
-<img hight="60px;" src="images/demo.gif"></img>
+  <img height="260px" src="images/demo.gif" alt="Parallax header demo" />
 </p>
 
-## [Youtube video URL](https://www.youtube.com/watch?v=YZ5nlRjstA4)
-## Installation with npm
+## Demo Video
+
+- Existing YouTube demo: [Watch on YouTube](https://www.youtube.com/watch?v=YZ5nlRjstA4)
+
+## Installation (npm)
 
 ```sh
 npm install ionic-react-header-parallax --save
 ```
 
-## Installation with yarn
+## Installation (yarn)
 
 ```sh
 yarn add ionic-react-header-parallax
 ```
 
-## Example
+## Quick Start
 
 ```tsx
-import * as React from 'react'
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
-import { useIonHeaderParallax } from 'ionic-react-header-parallax'
+import * as React from "react";
+import {
+  IonBackButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import { useIonHeaderParallax } from "ionic-react-header-parallax";
 
 const Home: React.FC = () => {
-
-   const { ref } = useIonHeaderParallax({
-    image: 'https://picsum.photos/1080',
+  const { ref } = useIonHeaderParallax({
+    image: "https://picsum.photos/1080",
     showBarButtons: true,
-  })
+  });
 
   return (
     <IonPage>
@@ -65,19 +85,98 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="ion-padding-start ion-padding-end">
-        {...}
-      </IonContent>
+      <IonContent className="ion-padding-start ion-padding-end">{/* Your page content */}</IonContent>
     </IonPage>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
 ```
 
 ## API
 
-- [useIonHeaderParallax](https://github.com/ahmnouira/ionic-react-header-parallax#useIonHeaderParallax)
+### `useIonHeaderParallax(input)`
 
-### `useIonHeaderParallax`
+Returns:
+
+```ts
+{
+  ref: React.RefObject<any>
+  loading: boolean
+}
+```
+
+Input options:
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `image` | `string` | required | Main image URL used for the expanded header. |
+| `defaultImage` | `string` | `image` | Fallback image URL. |
+| `maximumHeight` | `number` | `300` | Expanded header max height in pixels. |
+| `expandedColor` | `string` | `#313131` | Overlay color behind/with image. |
+| `titleColor` | `string` | `#AAA` | Title and button color (collapsed/managed states). |
+| `wait` | `number` | `300` | Delay before initialization (ms). Useful for async page layout. |
+| `showBarButtons` | `boolean` | `false` | Move `IonButtons` into image area while expanded. |
+| `buttonsToShow` | `"start" \| "end"` | `undefined` | Controls which slot buttons appear after collapse when `showBarButtons` is enabled. |
+| `titleStyle` | `Partial<CSSStyleDeclaration>` | `undefined` | Custom inline style applied to `IonTitle` (collapsed state). |
+| `startButtonStyle` | `Partial<CSSStyleDeclaration>` | `undefined` | Custom inline style applied to start `IonButtons` (collapsed state). |
+| `endButtonStyle` | `Partial<CSSStyleDeclaration>` | `undefined` | Custom inline style applied to end `IonButtons` (collapsed state). |
+
+## More Examples
+
+### 1) Minimal setup
+
+```tsx
+const { ref } = useIonHeaderParallax({
+  image: "https://picsum.photos/1200/700",
+});
+```
+
+### 2) Taller hero image + transparent toolbar when expanded
+
+```tsx
+const { ref } = useIonHeaderParallax({
+  image: "https://picsum.photos/1600/900",
+  maximumHeight: 420,
+  expandedColor: "#111",
+  titleColor: "#fff",
+});
+```
+
+### 3) Keep action buttons visible in expanded header
+
+```tsx
+const { ref } = useIonHeaderParallax({
+  image: "https://picsum.photos/1500/900",
+  showBarButtons: true,
+  buttonsToShow: "end",
+  endButtonStyle: { marginRight: "8px" },
+});
+```
+
+### 4) Dynamic image updates
+
+```tsx
+const [cover, setCover] = React.useState("https://picsum.photos/1400/800");
+const { ref, loading } = useIonHeaderParallax({
+  image: cover,
+  wait: 100,
+});
+```
+
+## Requirements
+
+- An `IonPage` wrapper
+- An `IonHeader` containing at least one `IonToolbar`
+- An `IonContent` in the same page
+
+## Troubleshooting
+
+- If nothing happens, verify `ref` is attached to `IonHeader`.
+- If styles look wrong, ensure Ionic core CSS is loaded in your app.
+- If content overlaps, check custom CSS that alters `IonContent` scroll container.
+
+## License
+
+MIT
