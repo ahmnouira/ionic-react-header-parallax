@@ -34,12 +34,17 @@ Attach the returned `ref` to your `IonHeader`, and the hook handles:
 - Dynamic title/button styles when collapsed
 
 <p align="center">
-  <img height="260px" src="images/demo.gif" alt="Parallax header demo" />
+  <img height="260px" src="demos/demo.gif" alt="Parallax header demo" />
 </p>
 
-## Demo Video
+## Video Examples
 
 - Existing YouTube demo: [Watch on YouTube](https://www.youtube.com/watch?v=YZ5nlRjstA4)
+- Local examples (recorded from the sample app):
+  - [Example 1](demos/1.mp4)
+  - [Example 2](demos/2.mp4)
+  - [Example 3](demos/3.mp4)
+  - [Example 4](demos/4.mp4)
 
 ## Installation (npm)
 
@@ -176,6 +181,13 @@ const { ref, loading } = useIonHeaderParallax({
 - If nothing happens, verify `ref` is attached to `IonHeader`.
 - If styles look wrong, ensure Ionic core CSS is loaded in your app.
 - If content overlaps, check custom CSS that alters `IonContent` scroll container.
+
+## Documentation Notes
+
+- Start from the `Quick Start` section, then adjust behavior using the options listed in `API`.
+- Use `showBarButtons` and `buttonsToShow` when you want action buttons in the expanded header.
+- Use `wait` when your layout depends on async data and header initialization happens too early.
+- Review `More Examples` and the `videos/` clips together to map each configuration to scroll behavior.
 
 ## License
 
