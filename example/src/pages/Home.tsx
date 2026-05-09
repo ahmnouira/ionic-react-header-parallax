@@ -17,13 +17,12 @@ import { useIonHeaderParallax } from "ionic-react-header-parallax";
 const Home: React.FC = () => {
   const { ref } = useIonHeaderParallax({
     image: "https://picsum.photos/1080",
-    buttonsToShow: "end",
+    maximumHeight: 480,
     showBarButtons: true,
     titleColor: "white",
-    titleStyle: {
-      transition: "all 1s ease",
-      color: "gold",
-    },
+    titleStyle: {},
+    endButtonStyle: {},
+    startButtonStyle: {},
   });
 
   return (
