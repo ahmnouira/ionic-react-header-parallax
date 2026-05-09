@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export type UseIonHeaderParallaxInput = {
   image: string;
   expandedColor?: string;
@@ -18,7 +16,3 @@ export type UseIonHeaderParallaxResult = {
   ref: React.RefObject<any>;
   loading: boolean;
 };
-
-export function useIonHeaderParallax(
-  input: UseIonHeaderParallaxInput,
-): UseIonHeaderParallaxResult;
