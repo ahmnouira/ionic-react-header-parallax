@@ -1,3 +1,4 @@
+
 <h1 align="center">ionic-react-header-parallax</h1>
 
 <p align="center">
@@ -33,18 +34,32 @@ Attach the returned `ref` to your `IonHeader`, and the hook handles:
 - Optional movement/styling of header buttons
 - Dynamic title/button styles when collapsed
 
-<p align="center">
-  <img height="260px" src="demos/demo.gif" alt="Parallax header demo" />
-</p>
+
 
 ## Video Examples
+<p align="center">
+<table>
+<tr>
+<td>
+  <video src="https://github.com/user-attachments/assets/891e3f47-7ff0-46e8-9bcd-e5b2404600e1" controls></video>
+</td>
+<td>
+  <video src="https://github.com/user-attachments/assets/3e98636c-1c8a-4ac2-966b-c42aa9f60dc3" controls></video>
+</td>
+</tr>
 
-- Existing YouTube demo: [Watch on YouTube](https://www.youtube.com/watch?v=YZ5nlRjstA4)
-- Local examples (recorded from the sample app):
-  - [Example 1](demos/1.mp4)
-  - [Example 2](demos/2.mp4)
-  - [Example 3](demos/3.mp4)
-  - [Example 4](demos/4.mp4)
+<tr>
+<td>
+  <video src="https://github.com/user-attachments/assets/fde6530a-921c-423d-a471-ba65434f3fca" controls></video>
+</td>
+<td>
+  <video src="https://github.com/user-attachments/assets/17cfeb13-3b3c-412e-b2e8-2ab096798722" controls></video>
+</td>
+</tr>
+</table>
+</p>
+
+Existing YouTube demo: [Watch on YouTube](https://www.youtube.com/watch?v=YZ5nlRjstA4)
 
 ## Installation (npm)
 
