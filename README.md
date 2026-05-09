@@ -1,3 +1,4 @@
+
 <h1 align="center">ionic-react-header-parallax</h1>
 
 <p align="center">
@@ -33,13 +34,32 @@ Attach the returned `ref` to your `IonHeader`, and the hook handles:
 - Optional movement/styling of header buttons
 - Dynamic title/button styles when collapsed
 
+
+
+## Video Examples
 <p align="center">
-  <img height="260px" src="images/demo.gif" alt="Parallax header demo" />
+<table>
+<tr>
+<td>
+  <video src="https://github.com/user-attachments/assets/891e3f47-7ff0-46e8-9bcd-e5b2404600e1" controls></video>
+</td>
+<td>
+  <video src="https://github.com/user-attachments/assets/3e98636c-1c8a-4ac2-966b-c42aa9f60dc3" controls></video>
+</td>
+</tr>
+
+<tr>
+<td>
+  <video src="https://github.com/user-attachments/assets/fde6530a-921c-423d-a471-ba65434f3fca" controls></video>
+</td>
+<td>
+  <video src="https://github.com/user-attachments/assets/17cfeb13-3b3c-412e-b2e8-2ab096798722" controls></video>
+</td>
+</tr>
+</table>
 </p>
 
-## Demo Video
-
-- Existing YouTube demo: [Watch on YouTube](https://www.youtube.com/watch?v=YZ5nlRjstA4)
+Existing YouTube demo: [Watch on YouTube](https://www.youtube.com/watch?v=YZ5nlRjstA4)
 
 ## Installation (npm)
 
@@ -176,6 +196,13 @@ const { ref, loading } = useIonHeaderParallax({
 - If nothing happens, verify `ref` is attached to `IonHeader`.
 - If styles look wrong, ensure Ionic core CSS is loaded in your app.
 - If content overlaps, check custom CSS that alters `IonContent` scroll container.
+
+## Documentation Notes
+
+- Start from the `Quick Start` section, then adjust behavior using the options listed in `API`.
+- Use `showBarButtons` and `buttonsToShow` when you want action buttons in the expanded header.
+- Use `wait` when your layout depends on async data and header initialization happens too early.
+- Review `More Examples` and the `videos/` clips together to map each configuration to scroll behavior.
 
 ## License
 
