@@ -31,7 +31,7 @@
   "devDependencies": {
     "@capacitor/cli": "8.3.3",
     "@testing-library/dom": ">=7.21.4",
-    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "19.0.10",
